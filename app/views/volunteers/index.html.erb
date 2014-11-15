@@ -17,7 +17,7 @@
         <td><%= volunteer.first_name %></td>
         <td><%= volunteer.last_name %></td>
         <td><%= volunteer.contact_number %></td>
-        <td><%= volunteer.notes %></td>
+        <td style="max-width: 400px"><%= volunteer.notes %></td>
         <td>
           <%= link_to 'Details', volunteer, :class => "btn btn-default" %>
           <%= link_to 'Edit', edit_volunteer_path(volunteer), :class => "btn btn-default" %>
