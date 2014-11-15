@@ -66,6 +66,10 @@ class VolunteersController < ApplicationController
         @volunteer.blocks << b
       end
 
+      volunteer_params.each do |key, value|
+        @volunteer[key] = value
+      end
+
       respond_to do |format|
         if @volunteer.save
           format.html { redirect_to @volunteer, notice: 'Schedule was successfully updated.' }
