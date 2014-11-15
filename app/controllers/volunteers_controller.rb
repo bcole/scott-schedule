@@ -15,7 +15,7 @@ class VolunteersController < ApplicationController
   # GET /volunteers/1/edit
   def edit
     blocks_db = @volunteer.blocks;
-    @blocks = Array.new(7) { Array.new(10) }
+    @blocks = Array.new(7) { Array.new(20) }
 
     blocks_db.each do |block|
       @blocks[block.day][block.start_time] = true;

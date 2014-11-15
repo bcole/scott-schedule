@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 for d in 0..6
-	for t in 0..9
+	for t in 0..19
 		Block.create(day: d, start_time: t)
 	end
 end

@@ -1,33 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @volunteer.first_name %>
-</p>
+<div class="center-block" style="width: 50%">
+<table class="table">
+<tr>
+  <th>First name:</th>
+  <td><%= @volunteer.first_name %></td>
+</tr>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @volunteer.last_name %>
-</p>
+<tr>
+  <th>Last name:</th>
+  <td><%= @volunteer.last_name %></td>
+</tr>
 
-<p>
-  <strong>Contact number:</strong>
-  <%= @volunteer.contact_number %>
-</p>
+<tr>
+  <th>Contact number:</th>
+  <td><%= @volunteer.contact_number %></td>
+</tr>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @volunteer.notes %>
-</p>
+<tr>
+  <th>Notes:</th>
+  <td><%= @volunteer.notes %></td>
+</tr>
 
-<p>
- 	<strong>Choosen time slots:</strong>
+<tr>
+ 	<th>Choosen time slots:</th>
+ 	<td>
  	<ul>
  	<% @volunteer.blocks.each do |block| %>
  		<li><%= format_block(block) %></li>
  	<% end %>
  	</ul>
-</p>
+ 	</td>
+ </tr>
+</table>
 
-<%= link_to 'Edit', edit_volunteer_path(@volunteer) %> |
-<%= link_to 'Back', volunteers_path %>
+<div class="text-center">
+<%= link_to 'Edit ' + @volunteer.first_name + '\'s Schedule', edit_volunteer_path(@volunteer), :class => 'btn btn-default' %> 
+<%= link_to 'Back to All Volunteers', volunteers_path, :class => 'btn btn-default' %>
+</div>
+
+</div>

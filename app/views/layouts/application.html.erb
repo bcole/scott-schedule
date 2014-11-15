@@ -10,9 +10,67 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <style type="text/css">  
+    /* Sticky footer styles
+    -------------------------------------------------- */  
+    html,
+    body {
+      height: 100%;
+      /* The html and body elements cannot have any padding or margin. */
+    }  
+    /* Wrapper for page content to push down footer */
+    #wrap {
+      min-height: 100%;
+      height: auto !important;
+      height: 100%;
+      /* Negative indent footer by it's height */
+      margin: 0 auto -60px;
+    }  
+    /* Set the fixed height of the footer here */
+    #push,
+    #footer {
+      height: 60px;
+    }
+    #footer {
+      background-color: #f5f5f5;
+    }  
+    /* Lastly, apply responsive CSS fixes as necessary */
+    @media (max-width: 767px) {
+      #footer {
+        margin-left: -20px;
+        margin-right: -20px;
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    .container .credit {
+        margin: 20px 0;
+      }
+
+    .muted {
+	  color: #999999;
+	}
+
+	a.muted:hover,
+	a.muted:focus {
+	  color: #808080;
+	  background-color: transparent;
+	}
+
+	a:hover {
+    	text-decoration: none;
+    	cursor: pointer;
+    }
+
+    a.btn-danger {
+    	color: #FFFFFF;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+<div id="wrap">
+<div class="container" style="padding-bottom: 40px">
 <nav class="navbar navbar-default" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -41,6 +99,15 @@
 
 <% unless params.has_key? "hideNav" %>
 </div>
+<div id="push"></div>
+</div>
+
+<div id="footer">
+	<div class="container" style="text-align: center">
+		<p class="muted credit">Created by <a href="https://www.facebook.com/BNCole">Brandon Cole</a> &copy; 2014</p>
+	</div>
+</div>
+
 </body>
 </html>
 <% end %>

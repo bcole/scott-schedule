@@ -6,8 +6,8 @@ class BlocksController < ApplicationController
   def index
     blocks_db = Block.all
 
-    @blocks_count = Array.new(7) { Array.new(10) }
-    @blocks = Array.new(7) { Array.new(10) }
+    @blocks_count = Array.new(7) { Array.new(20) }
+    @blocks = Array.new(7) { Array.new(20) }
 
     blocks_db.each do |block|
       @blocks[block.day][block.start_time] = block;
