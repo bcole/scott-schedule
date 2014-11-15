@@ -26,7 +26,7 @@
  	<th>Choosen time slots:</th>
  	<td>
  	<ul>
- 	<% @volunteer.blocks.each do |block| %>
+ 	<% @blocks.each do |block| %>
  		<% confirmed = block.confirmations.find{|c| c.volunteer == @volunteer}.confirmed %>
  		<li <% if confirmed %> class="bold" <% end %>><%= format_block(block) %> <% if confirmed %> (Confirmed Visit) <% end %></li>
  	<% end %>

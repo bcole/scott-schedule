@@ -10,6 +10,8 @@ class VolunteersController < ApplicationController
   # GET /volunteers/1
   # GET /volunteers/1.json
   def show
+    @blocks = @volunteer.blocks.order(:day, :start_time)
+    # @blocks.sort_by &:day
   end
 
   # GET /volunteers/1/edit
