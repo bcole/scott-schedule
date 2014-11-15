@@ -23,13 +23,19 @@ module VolunteersHelper
 
 		time = block.start_time
 
+
 		start_slot = 10
-        t = start_slot + time
+        t = start_slot + (time / 2)
         s = 'AM'
         if t > 11
         	s = 'PM'
 		end
         t = (t - 1) % 12 + 1
-        d + ' - ' + t.to_s + s
+
+        str = ":00"
+        if (time % 2 == 1)
+        	str = ":30"
+        end
+        d + ' - ' + t.to_s + str + s
 	end
 end
