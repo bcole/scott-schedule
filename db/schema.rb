@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141114154601) do
+ActiveRecord::Schema.define(version: 20141115174242) do
 
   create_table "blocks", force: true do |t|
     t.integer  "day"
@@ -20,10 +20,16 @@ ActiveRecord::Schema.define(version: 20141114154601) do
     t.datetime "updated_at"
   end
 
-  create_table "blocks_volunteers", id: false, force: true do |t|
-    t.integer "block_id"
-    t.integer "volunteer_id"
+  create_table "confirmations", force: true do |t|
+    t.integer  "volunteer_id"
+    t.integer  "block_id"
+    t.boolean  "confirmed",    default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
+
+  add_index "confirmations", ["block_id"], name: "index_confirmations_on_block_id"
+  add_index "confirmations", ["volunteer_id"], name: "index_confirmations_on_volunteer_id"
 
   create_table "volunteers", force: true do |t|
     t.string   "first_name"

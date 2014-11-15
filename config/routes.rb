@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get 'blocks' => 'blocks#index'
   get 'blocks/:id' => 'blocks#show', as: :block
 
+  put 'volunteers/:vid/blocks/:bid' => 'volunteers#toggleConfirmation', as: :toggle_confirmation
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

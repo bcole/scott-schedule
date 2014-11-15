@@ -15,10 +15,5 @@ class CreateVolunteersAndBlocks < ActiveRecord::Migration
 
       t.timestamps
     end
-
-    create_table :blocks_volunteers, id:false do |t|
-   	  t.belongs_to :block
-   	  t.belongs_to :volunteer
-    end
   end
 end

@@ -12,5 +12,8 @@ for d in 0..6
 	end
 end
 
-v = Volunteer.create(first_name: 'Brandon', last_name: 'Cole', contact_number: '716-474-3417', notes: 'no other notes....');
-v.blocks = [ Block.find(1), Block.find(20), Block.find(21) ];
+v = Volunteer.create(first_name: 'Brandon', last_name: 'Cole', contact_number: '716-474-3417', notes: 'My email is bnc8088@rit.edu');
+
+Confirmation.create(volunteer: v, block: Block.find(1), confirmed: false)
+Confirmation.create(volunteer: v, block: Block.find(2), confirmed: false)
+Confirmation.create(volunteer: v, block: Block.find(21), confirmed: false)

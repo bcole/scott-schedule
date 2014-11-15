@@ -1,3 +1,17 @@
+<script>
+function toggleConfirm(i, url) {
+	$("#confirm_" + i).toggleClass("bold");
+	$.ajax({
+		type: "PUT", url: url + "?hideNav",
+		success: function(msg){
+		},
+		error: function(){
+			alert("Failed to toggle confirmation.");
+		}
+	});
+}
+</script>
+
 <p>
 	<strong><%= format_block(@block) %></strong>
 </p>
@@ -6,8 +20,9 @@
  	<strong>Volunteers:</strong>
  	<% if @block.volunteers.any? %>
  	<ul>
- 	<% @block.volunteers.each do |volunteer| %>
- 		<li><%= volunteer.first_name + ' ' + volunteer.last_name %></li>
+ 	<% @block.volunteers.each_with_index do |volunteer, i| %>
+ 		<% confirmed = volunteer.confirmations.find{|c| c.block == @block}.confirmed %>
+ 		<li><span <% if confirmed %> class="bold" <% end %> id="confirm_<%= i %>"><%= link_to volunteer.first_name + ' ' + volunteer.last_name, volunteer %></span> - <a onclick="toggleConfirm(<%= i %>, '<%= toggle_confirmation_path(volunteer, @block) %>')">Toggle Confirmation</a></li>
  	<% end %>
  	</ul>
  	<% else %>

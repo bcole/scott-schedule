@@ -4,14 +4,14 @@ function clickTime(url) {
   $("#myModal").modal('show');
   $("#modalBody").html("Loading..");
   $.ajax({
-     type: "GET", url: url + "?hideNav",
-         success: function(msg){
-            $("#modalBody").html(msg);
-         },
- error: function(){
- alert("failure");
- }
-       });
+   type: "GET", url: url + "?hideNav",
+     success: function(msg){
+      $("#modalBody").html(msg);
+     },
+     error: function(){
+      alert("failure");
+     }
+   });
 }
 </script>
 
@@ -99,7 +99,7 @@ function clickTime(url) {
         <h4 class="modal-title" id="myModalLabel">Details</h4>
       </div>
       <div class="modal-body" id="modalBody">
-        Body.
+        Loading..
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

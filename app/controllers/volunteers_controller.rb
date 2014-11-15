@@ -32,15 +32,16 @@ class VolunteersController < ApplicationController
     else
       volunteer = Volunteer.new(volunteer_params)
 
-      blocks = params.require(:blocks)
-      blocks.each do |block_id|
-        day, time = block_id.split('_').map(&:to_i)
-        b = Block.find_by day: day, start_time: time
-        volunteer.blocks << b
-      end
-
       respond_to do |format|
         if volunteer.save
+          blocks = params.require(:blocks)
+          blocks.each do |block_id|
+            day, time = block_id.split('_').map(&:to_i)
+            b = Block.find_by day: day, start_time: time
+            c = Confirmation.new(volunteer: volunteer, block: b, confirmed: false)
+            c.save
+            #volunteer.blocks << b
+          end
           format.html { redirect_to blocks_path, notice: 'Thank you! Schedule was successfully submitted.' }
         else
           format.html { redirect_to blocks_path, flash: {:error => 'There was a problem submitting.' } }
@@ -57,13 +58,21 @@ class VolunteersController < ApplicationController
         format.html { redirect_to blocks_path, flash: {:error => 'Select at least one time slot.' } }
       end
     else
-      @volunteer.blocks.clear
-
       blocks = params.require(:blocks)
+
+      confirmations = Confirmation.where volunteer: @volunteer
+      confirmations.each do |c|
+        unless blocks.include?(c)
+          c.destroy
+        end
+      end
+
       blocks.each do |block_id|
         day, time = block_id.split('_').map(&:to_i)
         b = Block.find_by day: day, start_time: time
-        @volunteer.blocks << b
+        unless confirmations.include?(b)
+          Confirmation.new(volunteer: @volunteer, block: b, confirmed: false).save
+        end
       end
 
       volunteer_params.each do |key, value|
@@ -77,6 +86,20 @@ class VolunteersController < ApplicationController
           format.html { redirect_to @volunteer, flash: {:error => 'There was a problem submitting.' } }
         end
       end
+    end
+  end
+
+  # PUT /volunteers/1/blocks/1
+  def toggleConfirmation
+    volunteer = Volunteer.find(params[:vid])
+    block = Block.find(params[:bid])
+
+    c = Confirmation.where(:block => block, :volunteer => volunteer).first
+    c.confirmed = !c.confirmed
+    if c.save
+      render :nothing => true, :status => 200
+    else
+      render :nothing => true, :status => 400
     end
   end
 

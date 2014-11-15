@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="center-block" style="width: 50%">
+<div class="center-block" style="width: 80%">
 <table class="table">
 <tr>
   <th>First name:</th>
@@ -27,7 +27,8 @@
  	<td>
  	<ul>
  	<% @volunteer.blocks.each do |block| %>
- 		<li><%= format_block(block) %></li>
+ 		<% confirmed = block.confirmations.find{|c| c.volunteer == @volunteer}.confirmed %>
+ 		<li <% if confirmed %> class="bold" <% end %>><%= format_block(block) %> <% if confirmed %> (Confirmed Visit) <% end %></li>
  	<% end %>
  	</ul>
  	</td>
