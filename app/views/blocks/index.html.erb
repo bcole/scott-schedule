@@ -1,0 +1,110 @@
+
+<script style="text/javascript">
+function clickTime(url) {
+  $("#myModal").modal('show');
+  $("#modalBody").html("Loading..");
+  $.ajax({
+     type: "GET", url: url + "?hideNav",
+         success: function(msg){
+            $("#modalBody").html(msg);
+         },
+ error: function(){
+ alert("failure");
+ }
+       });
+}
+</script>
+
+<h1 style="text-align: center">Scott's Visitors Schedule</h1>
+<br>
+<h3>Number of people for each timeslot:</h3>
+<% if flash[:error] %>
+  <div id="error_explanation" ng-show="!hideError" ng-init="editMode = true">
+    <h2>Error: <%= flash[:error] %> <a class="btn btn-danger" style="font-color: white" ng-click="hideError=true">X</a></h2>
+  </div>
+<% end %>
+<% if notice %>
+  <div class="has-success">
+    <h4><%= notice %></h4>
+  </div>
+<% end %>
+<%= form_tag({controller: "volunteers", action: "create"}, method: "post") do %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tues</th>
+      <th>Wed</th>
+      <th>Thurs</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% for time_slot in 0..9 %>
+      <tr>
+        <td>
+          <%= format_time(time_slot) + ' - ' + format_time(time_slot+1) %>
+        </td>
+        <% for day in 0..6 %>
+          <td ng-show='!editMode'>
+            <a style="btn btn-primary" onclick="clickTime('<%= block_path(@blocks[day][time_slot].id) %>')">
+            <%= @blocks_count[day][time_slot] %>
+            </a>
+          </td>
+          <td ng-show='editMode'>
+            <% id = cb_id(day, time_slot) %>
+            <label class="td" for="<%= id %>">
+              <input id="<%= id %>" type="checkbox" name="blocks[]" value="<%= id %>"> (<%= @blocks_count[day][time_slot] %>)
+            </label>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<div style="text-align: center" class="form-inline">
+<div style="display: inline" ng-show="editMode">
+  <div class="form-group">
+    <input type="text" class="form-control" id="first_name" name="volunteer[first_name]" placeholder="First Name">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="last_name" name="volunteer[last_name]" placeholder="Last Name">
+  </div>
+  <div class="form-group">
+    <input type="text" class="form-control" id="contact_number" name="volunteer[contact_number]" placeholder="Contact Phone #">
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" id="notes" name="volunteer[notes]" placeholder="Other Notes (optional)"></textarea>
+  </div>
+</div>
+<input ng-show="editMode" type="submit" name="submit" value="Submit" class="btn btn-primary">
+
+<a class="btn" ng-class="{true: 'btn-primary', false: 'btn-danger'}[!editMode]" ng-click="editMode = !editMode">{{!editMode && 'Add New Entry' || 'Cancel'}}</a>
+</div>
+
+<% end %>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Details</h4>
+      </div>
+      <div class="modal-body" id="modalBody">
+        Body.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

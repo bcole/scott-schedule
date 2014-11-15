@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @volunteer.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @volunteer.last_name %>
+</p>
+
+<p>
+  <strong>Contact number:</strong>
+  <%= @volunteer.contact_number %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @volunteer.notes %>
+</p>
+
+<p>
+ 	<strong>Choosen time slots:</strong>
+ 	<ul>
+ 	<% @volunteer.blocks.each do |block| %>
+ 		<li><%= format_block(block) %></li>
+ 	<% end %>
+ 	</ul>
+</p>
+
+<%= link_to 'Edit', edit_volunteer_path(@volunteer) %> |
+<%= link_to 'Back', volunteers_path %>

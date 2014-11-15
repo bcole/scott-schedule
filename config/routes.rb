@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  root 'blocks#index'
+
+  resources :volunteers
+
+  get 'blocks' => 'blocks#index'
+  get 'blocks/:id' => 'blocks#show', as: :block
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,16 @@
+<p>
+	<strong><%= format_block(@block) %></strong>
+</p>
+
+<p>
+ 	<strong>Volunteers:</strong>
+ 	<% if @block.volunteers.any? %>
+ 	<ul>
+ 	<% @block.volunteers.each do |volunteer| %>
+ 		<li><%= volunteer.first_name + ' ' + volunteer.last_name %></li>
+ 	<% end %>
+ 	</ul>
+ 	<% else %>
+ 	<br>No volunteers yet.
+ 	<% end %>
+</p>

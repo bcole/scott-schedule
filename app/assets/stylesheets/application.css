@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+
+label.td { 
+	font-weight: normal;
+    display: block; 
+    min-height: 100%; /* for the latest browsers which support min-height */
+    height: auto !important; /* for newer IE versions */
+    height: 100%; /* the only height-related attribute that IE6 does not ignore  */
+}
