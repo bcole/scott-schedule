@@ -51,7 +51,7 @@ function clickTime(url) {
         </td>
         <% for day in 0..6 %>
           <td ng-show='!editMode'>
-            <a style="btn btn-primary" onclick="clickTime('<%= block_path(@blocks[day][time_slot].id) %>')">
+            <a class="btn btn-default" onclick="clickTime('<%= block_path(@blocks[day][time_slot].id) %>')">
             <%= @blocks_count[day][time_slot] %>
             </a>
           </td>

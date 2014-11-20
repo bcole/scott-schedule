@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   put 'volunteers/:vid/blocks/:bid' => 'volunteers#toggleConfirmation', as: :toggle_confirmation
 
+  get 'info' => 'info#index', as: :info
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
